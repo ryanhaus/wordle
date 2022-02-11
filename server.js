@@ -38,4 +38,4 @@ app.get("/", (req, res) => {
     res.redirect("/play?boardCount=8&rowCount=15"); // auto redirect to 1 board of 5x6
 });
 
-app.listen(3000 || process.env.PORT); // start server
+app.listen(process.env.PORT); // start server
