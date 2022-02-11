@@ -1,0 +1,119 @@
+/* import font */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;500;700&display=swap');
+
+/* root variables */
+:root
+{
+    --block-size: min(6vh, 6vw);
+    --key-size: min(75px, 6vw);
+}
+
+body
+{
+    background-color: #1a1a1b;
+}
+
+h1
+{
+    /* font stuff */
+    font-size: 6vh;
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    text-align: center;
+    font-weight: 500;
+
+    /* spacing, for subtitle */
+    margin-bottom: 0;
+}
+
+h3
+{
+    /* font stuff */
+    font-size: 3vh;
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    text-align: center;
+    font-weight: 300;
+
+    /* spacing */
+    margin-top: 0;
+}
+
+#boards
+{
+    /* positioning */
+    position: relative;
+    left: calc(50% - var(--block-size) * 7.5);
+    margin-bottom: var(--block-size);
+    display: block;
+    flex: 1;
+    overflow: auto;
+
+    /* sizing */
+    max-width: calc(var(--block-size) * 7.5 * 2 + 2px);
+}
+
+.board
+{
+    /* appearance */
+    background-color: #272729;
+    display: inline-block;
+    width: calc(var(--block-size) * 6.5 + 1px);
+
+    /* spacing */
+    padding: calc(var(--block-size) / 2);
+}
+
+.square
+{
+    /* make visible size constant */
+    width: var(--block-size);
+    height: var(--block-size);
+
+    /* appearance */
+    background-color: #121213;
+    border: calc(var(--block-size) / 16) #3a3a3c solid;
+    margin: calc(var(--block-size) / 16);
+
+    /* font stuff */
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    font-size: calc(var(--block-size) * 0.5);
+    vertical-align: middle;
+    line-height: var(--block-size);
+    font-weight: 700;
+    text-align: center;
+    user-select: none;
+
+    /* display it correctly */
+    display: inline-block;
+}
+
+.square.key
+{
+    /* replace any attributes using --block-size to use --key-size instead */
+    width: var(--key-size);
+    height: var(--key-size);
+    border: calc(var(--key-size) / 16) #3a3a3c solid;
+    margin: calc(var(--key-size / 16));
+    font-size: calc(var(--key-size) * 0.5);
+    line-height: var(--key-size);
+}
+
+.keyboard
+{
+    /* center appearance */
+    display: table;
+    margin-left: auto;
+    margin-right: auto;
+    
+    /* mouse pointer */
+    cursor: hand;
+    user-select: none;
+}
+
+word
+{
+    /* we don't want to show the answers */
+    display: none;
+}

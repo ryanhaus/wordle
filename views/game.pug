@@ -1,0 +1,36 @@
+// i made this in pug none of this is handwritten source is on github check that shit out https://github.com/ryanhaus/wordle 
+html 
+    head 
+        title Wordle Hell
+        link(rel="stylesheet", href="/static/styles.css")
+        script(src="/static/wordle.js")
+    body 
+        h1 Wordle Hell
+        h3=`using ${config.boardCount} boards sized 5x${config.rowCount}`
+
+        //- list of words to be used
+        wordslist#wordslist 
+            each word in words
+                word= `${word}`
+
+        //- generate blank boards depending on config values
+        div#boards
+            - var board = 0;
+            while board < config.boardCount
+                div.board(id=`game-board-${board++}`, align="center")
+                    - var row = 0;
+                    while row < config.rowCount
+                        div(id=`row-${row++}`)
+                            - var column = 0;
+                            while column < 5
+                                span.square(id=`column-${column++}`)
+        //- generate the keyboard with pretty colors
+        div.keyboard
+            //- keyboard template
+            mixin key(letter)
+                span(class="square key", id=`key-${letter}`, onclick!=`handleKeypress('${letter}');`)=`${letter}`
+            - var keyboard_content = [ ["Q","W","E","R","T","Y","U","I","O","P"], ["A","S","D","F","G","H","J","K","L"], ["GO","Z","X","C","V","B","N","M","<"] ];
+            each row in keyboard_content 
+                div.keyboard
+                    each letter in row
+                        +key(letter)(id=`key-${letter}`)
