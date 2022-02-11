@@ -3,7 +3,7 @@ const fs = require("fs");
 
 // load words lists
 const wlist = JSON.parse(fs.readFileSync("./words.json")).words;
-const dictionary = fs.readFileSync("./english_words.txt", "utf8").split("\r\n");
+const dictionary = fs.readFileSync("./english_words.txt", "utf8").split("\n");
 
 // express app setup
 const app = express();
