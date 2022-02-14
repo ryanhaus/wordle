@@ -15,7 +15,10 @@ class WordleGame
         word = word.toLowerCase();
 
         if (word == this.word) // win!
-            alert("win");
+        {
+            alert("win!");
+            this.active = false; // make sure future guesses don't get written here
+        }
 
         for (let i = 0; i < 5; i++) // go through each letter
         {
