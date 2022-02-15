@@ -8,13 +8,13 @@ html
         h1.text Wordle Hell
         h3.text=`using ${config.boardCount} boards sized 5x${config.rowCount}`
 
-        form.text(action="/play" align="center")
+        form.text.boardInput(action="/play" align="center" onsubmit="return verifyForm();")
             | Change to 
-            input.text(type="number" min="1" max="128" name="boardCount" value="8")
+            input.text.boardInput#boardNumber(type="number" min="1" max="32" name="boardCount" value=`${config.boardCount}`)
             |  boards sized 5x
-            input.text(type="number" min="6" max="256" name="rowCount" value="15")
+            input.text.boardInput(type="number" min="6" max="64" name="rowCount" value=`${config.rowCount}`)
             br
-            input.text(style="cursor: pointer;" type="submit" value="Change")
+            input.text.boardInput(style="cursor: pointer;" type="submit" value="Change")
 
         //- list of words to be used
         wordslist#wordslist 

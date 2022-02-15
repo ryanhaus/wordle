@@ -29,7 +29,7 @@ app.get("/play", (req, res) => {
 });
 
 // verify word
-app.get("/verify/:word", (req, res) => {
+app.post("/verify/:word", (req, res) => {
     res.send(JSON.stringify({ isWord: dictionary.indexOf(req.params.word.toLowerCase()) != -1 }));
 });
 

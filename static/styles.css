@@ -5,7 +5,7 @@
 :root
 {
     --block-size: min(6vh, 6vw);
-    --key-size: min(75px, 6vw);
+    --key-size: min(75px, 7.5vw);
 }
 
 body
@@ -20,12 +20,12 @@ body
     text-align: center;
 }
 
-form
+form.boardInput
 {
     font-size: 2vh;
 }
 
-input
+input.boardInput
 {
     background: none;
     border: none;
@@ -129,7 +129,7 @@ h3
 
 .keyboard.keys
 {
-    margin-bottom: var(--key-size);
+    margin-bottom: min(125px, calc(2 * var(--key-size)));
 }
 
 word

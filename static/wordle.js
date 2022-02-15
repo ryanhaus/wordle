@@ -69,11 +69,23 @@ function isLetter(s)
     return s.length == 1 && s.toUpperCase() != s.toLowerCase();
 }
 
+// verifies inputs of the board changing function
+function verifyForm()
+{
+    if (document.getElementById("boardNumber").value % 2 == 1) // if number is odd
+    {
+        alert(`Board number must be a multiple of 2, is currently ${document.getElementById("boardNumber").value}`);
+        return false; // not good
+    }
+
+    return true; // good to submit
+}
+
 // make HTTP GET request
 function httpGet(url)
 {
     let xmlHttpReq = new XMLHttpRequest();
-    xmlHttpReq.open("GET", url, false); 
+    xmlHttpReq.open("POST", url, false); 
     xmlHttpReq.send(null);
     return xmlHttpReq.responseText;
 }
