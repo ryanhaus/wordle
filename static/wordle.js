@@ -10,22 +10,43 @@ class WordleGame
     }
 
     // attempts a guess and adds it to the board
-    tryGuess(word, row)
+    tryGuess(_word, row)
     {
-        word = word.toLowerCase();
+        let word = _word.toLowerCase();
 
         if (word == this.word) // win!
             this.active = false; // make sure future guesses don't get written here
 
+        let colors = [];
+        let letterCounts = {};
+
         for (let i = 0; i < 5; i++) // go through each letter
+        {
+            if (letterCounts[word[i]] == undefined) letterCounts[word[i]] = 0; // if not already documented make it zero
+
+            letterCounts[this.word[i]]++; // change letter counts
+            colors[i] = "gray"; // default gray
+        }
+
+        for (let i = 0; i < 5; i++) // go through each letter
+            if (this.word[i] == word[i]) // if green
+            {
+                letterCounts[word[i]]--; // decrease letter count
+                colors[i] = "green"; // set to green
+            }
+
+        for (let i = 0; i < 5; i++) // go through each letter
+        {
+            if (letterCounts[word[i]] >= 1 && colors[i] == "gray") // if letter is present in another place
+            {
+                letterCounts[word[i]]--; // decrease count
+                colors[i] = "yellow"; // set to yellow
+            }
+
             setTimeout(() => {
-                if (word[i] == this.word[i])
-                    row.children[i].classList.add("switch_green");
-                else if (this.word.indexOf(word[i]) != -1)
-                    row.children[i].classList.add("switch_yellow");
-                else
-                    row.children[i].classList.add("switch_gray");
-            }, 250 * i);
+                row.children[i].classList.add(`switch_${colors[i]}`);
+            }, 100 * i);
+        }
     }
 }
 
