@@ -27,19 +27,19 @@ class WordleGame
             letterCounts[this.word[i]]++; // change letter counts
             colors[i] = "gray"; // default gray
         }
-
+        
         for (let i = 0; i < 5; i++) // go through each letter
             if (this.word[i] == word[i]) // if green
             {
-                letterCounts[this.word[i]]--; // decrease letter count
+                letterCounts[word[i]]--; // decrease letter count
                 colors[i] = "green"; // set to green
             }
 
         for (let i = 0; i < 5; i++) // go through each letter
         {
-            if (letterCounts[this.word[i]] >= 1 && colors[i] == "gray") // if letter is present in another place
+            if (letterCounts[word[i]] >= 1 && colors[i] == "gray") // if letter is present in another place
             {
-                letterCounts[this.word[i]]--; // decrease count
+                letterCounts[word[i]]--; // decrease count
                 colors[i] = "yellow"; // set to yellow
             }
 
