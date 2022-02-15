@@ -1,12 +1,20 @@
-// i made this in pug none of this is handwritten source is on github check that shit out https://github.com/ryanhaus/wordle 
+// https://github.com/ryanhaus/wordle 
 html 
     head 
         title Wordle Hell
         link(rel="stylesheet", href="/static/styles.css")
         script(src="/static/wordle.js")
     body 
-        h1 Wordle Hell
-        h3=`using ${config.boardCount} boards sized 5x${config.rowCount}`
+        h1.text Wordle Hell
+        h3.text=`using ${config.boardCount} boards sized 5x${config.rowCount}`
+
+        form.text(action="/play" align="center")
+            | Change to 
+            input.text(type="number" min="1" max="128" name="boardCount" value="8")
+            |  boards sized 5x
+            input.text(type="number" min="6" max="256" name="rowCount" value="15")
+            br
+            input.text(style="cursor: pointer;" type="submit" value="Change")
 
         //- list of words to be used
         wordslist#wordslist 
@@ -17,7 +25,7 @@ html
         div#boards
             - var board = 0;
             while board < config.boardCount
-                div.board(id=`game-board-${board++}`, align="center")
+                div.board(id=`game-board-${board++}`)
                     - var row = 0;
                     while row < config.rowCount
                         div(id=`row-${row++}`)
@@ -25,10 +33,11 @@ html
                             while column < 5
                                 span.square(id=`column-${column++}`)
         //- generate the keyboard with pretty colors
-        div.keyboard
+        div.keyboard.keys
             //- keyboard template
             mixin key(letter)
-                span(class="square key", id=`key-${letter}`, onclick!=`handleKeypress('${letter}');`)=`${letter}`
+                span.square.key(id=`key-${letter}`, onclick!=`handleKeypress('${letter}');`)=`${letter}`
+
             - var keyboard_content = [ ["Q","W","E","R","T","Y","U","I","O","P"], ["A","S","D","F","G","H","J","K","L"], ["GO","Z","X","C","V","B","N","M","<"] ];
             each row in keyboard_content 
                 div.keyboard

@@ -13,13 +13,31 @@ body
     background-color: #1a1a1b;
 }
 
+.text
+{    
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    text-align: center;
+}
+
+form
+{
+    font-size: 2vh;
+}
+
+input
+{
+    background: none;
+    border: none;
+    text-align: center;
+
+    font-size: 2vh;
+}
+
 h1
 {
     /* font stuff */
     font-size: 6vh;
-    color: white;
-    font-family: 'Roboto', sans-serif;
-    text-align: center;
     font-weight: 500;
 
     /* spacing, for subtitle */
@@ -30,9 +48,6 @@ h3
 {
     /* font stuff */
     font-size: 3vh;
-    color: white;
-    font-family: 'Roboto', sans-serif;
-    text-align: center;
     font-weight: 300;
 
     /* spacing */
@@ -112,8 +127,155 @@ h3
     user-select: none;
 }
 
+.keyboard.keys
+{
+    margin-bottom: var(--key-size);
+}
+
 word
 {
     /* we don't want to show the answers */
     display: none;
+}
+
+/* animation */
+@keyframes switch_gray
+{
+    0%
+    {
+        background-color: #121213;
+        border-color: #3a3a3c;
+        transform: rotateX(0deg);
+    }
+    
+    49%
+    {
+        background-color: #121213;
+        border-color: #3a3a3c;
+        transform: rotateX(90deg);
+    }
+    
+    51%
+    {
+        background-color: #3a3a3c;
+        border-color: #3a3a3c;
+        transform: rotateX(90deg);
+    }
+
+    100%
+    {
+        background-color: #3a3a3c;
+        border-color: #3a3a3c;
+        transform: rotateX(0deg);
+    }
+}
+
+@keyframes switch_yellow
+{
+    0%
+    {
+        background-color: #121213;
+        border-color: #3a3a3c;
+        transform: rotateX(0deg);
+    }
+    
+    49%
+    {
+        background-color: #121213;
+        border-color: #3a3a3c;
+        transform: rotateX(90deg);
+    }
+    
+    51%
+    {
+        background-color: #b59f3b;
+        border-color: #b59f3b;
+        transform: rotateX(90deg);
+    }
+
+    100%
+    {
+        background-color: #b59f3b;
+        border-color: #b59f3b;
+        transform: rotateX(0deg);
+    }
+}
+
+@keyframes switch_green
+{
+    0%
+    {
+        background-color: #121213;
+        border-color: #3a3a3c;
+        transform: rotateX(0deg);
+    }
+    
+    49%
+    {
+        background-color: #121213;
+        border-color: #3a3a3c;
+        transform: rotateX(90deg);
+    }
+    
+    51%
+    {
+        background-color: #538d4e;
+        border-color: #538d4e;
+        transform: rotateX(90deg);
+    }
+
+    100%
+    {
+        background-color: #538d4e;
+        border-color: #538d4e;
+        transform: rotateX(0deg);
+    }
+}
+
+@keyframes typing
+{
+    0%
+    {
+        font-size: calc(var(--block-size) * 0.5);
+    }
+
+    50%
+    {
+        font-size: calc(var(--block-size) * 0.55);
+    }
+    
+    100%
+    {
+        font-size: calc(var(--block-size) * 0.5);
+    }
+}
+
+.switch_gray
+{
+    animation: switch_gray;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+}
+
+.switch_yellow
+{
+    animation: switch_yellow;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+}
+
+.switch_green
+{
+    animation: switch_green;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+}
+
+.typing
+{
+    animation: typing;
+    animation-duration: 0.2s;
 }

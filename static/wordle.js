@@ -15,17 +15,17 @@ class WordleGame
         word = word.toLowerCase();
 
         if (word == this.word) // win!
-        {
-            alert("win!");
             this.active = false; // make sure future guesses don't get written here
-        }
 
         for (let i = 0; i < 5; i++) // go through each letter
-        {
-            row.children[i].style.backgroundColor = "3a3a3c"; // default set it to gray
-            if (this.word.indexOf(word[i]) != -1) row.children[i].style.backgroundColor = "b59f3b"; // if in the word but in the wrong place then set it to yellow
-            if (word[i] == this.word[i]) row.children[i].style.backgroundColor = "538d4e"; // if in the word in the right place then set it to green
-        }
+            setTimeout(() => {
+                if (word[i] == this.word[i])
+                    row.children[i].classList.add("switch_green");
+                else if (this.word.indexOf(word[i]) != -1)
+                    row.children[i].classList.add("switch_yellow");
+                else
+                    row.children[i].classList.add("switch_gray");
+            }, 250 * i);
     }
 }
 
@@ -78,7 +78,8 @@ function handleKeypress(letter)
                     }
 
                     for (let i = 0; i < gameCount; i++) // go through each word
-                        games[i].tryGuess(currentlyTyped, games[i].board.children[currentRow]); // try word
+                        if (games[i].active)
+                            games[i].tryGuess(currentlyTyped, games[i].board.children[currentRow]); // try word
 
                     // reset typed and increase row
                     currentlyTyped = "";
@@ -94,7 +95,18 @@ function handleKeypress(letter)
     for (let i = 0; i < 5; i++) // for each letter
         for (let j = 0; j < gameCount; j++) // go through each game
             if (games[j].active)
-                games[j].board.children[currentRow].children[i].innerText = currentlyTyped[i] == undefined ? "" : currentlyTyped[i]; // display
+            {
+                let target = games[j].board.children[currentRow].children[i];
+                target.innerText = currentlyTyped[i] == undefined ? "" : currentlyTyped[i]; // display
+                
+                if (i == currentlyTyped.length - 1 && letter != "<")
+                {
+                    target.classList.add("typing");
+                    setTimeout(() => {
+                        target.classList.remove("typing");
+                    }, 200);
+                }
+            }
 }
 
 // actual keyboard input

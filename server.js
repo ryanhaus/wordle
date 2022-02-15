@@ -3,7 +3,7 @@ const fs = require("fs");
 
 // load words lists
 const wlist = JSON.parse(fs.readFileSync("./words.json")).words;
-const dictionary = fs.readFileSync("./english_words.txt", "utf8").split("\n");
+const dictionary = fs.readFileSync("./english_words.txt", "utf8").split(",");
 
 // express app setup
 const app = express();
@@ -38,4 +38,4 @@ app.get("/", (req, res) => {
     res.redirect("/play?boardCount=8&rowCount=15"); // auto redirect to 1 board of 5x6
 });
 
-app.listen(process.env.PORT); // start server
+app.listen(process.env.PORT || 3000); // start server
