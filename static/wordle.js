@@ -22,7 +22,7 @@ class WordleGame
 
         for (let i = 0; i < 5; i++) // go through each letter
         {
-            if (letterCounts[word[i]] == undefined) letterCounts[word[i]] = 0; // if not already documented make it zero
+            if (letterCounts[this.word[i]] == undefined) letterCounts[this.word[i]] = 0; // if not already documented make it zero
 
             letterCounts[this.word[i]]++; // change letter counts
             colors[i] = "gray"; // default gray
@@ -31,15 +31,15 @@ class WordleGame
         for (let i = 0; i < 5; i++) // go through each letter
             if (this.word[i] == word[i]) // if green
             {
-                letterCounts[word[i]]--; // decrease letter count
+                letterCounts[this.word[i]]--; // decrease letter count
                 colors[i] = "green"; // set to green
             }
 
         for (let i = 0; i < 5; i++) // go through each letter
         {
-            if (letterCounts[word[i]] >= 1 && colors[i] == "gray") // if letter is present in another place
+            if (letterCounts[this.word[i]] >= 1 && colors[i] == "gray") // if letter is present in another place
             {
-                letterCounts[word[i]]--; // decrease count
+                letterCounts[this.word[i]]--; // decrease count
                 colors[i] = "yellow"; // set to yellow
             }
 
