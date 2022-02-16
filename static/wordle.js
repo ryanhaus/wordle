@@ -48,6 +48,20 @@ class WordleGame
             }, 100 * i);
         }
     }
+
+    // do invalid word animation
+    invalidWordAnim(row)
+    {
+        const parent = this.board.children[row].children;
+        for (let i = 0; i < parent.length; i++) // go through each letter
+        {
+            parent[i].classList.add("invalid_word"); // add animation class
+
+            setTimeout(() => {
+                parent[i].classList.remove("invalid_word");
+            }, 500);
+        }
+    }
 }
 
 // will be set later, global variables
@@ -106,11 +120,14 @@ function handleKeypress(letter)
                 {
                     if (!JSON.parse(httpGet(`/verify/${currentlyTyped.toLowerCase()}`)).isWord)
                     {
-                        alert("Not a word");
+                        // not a word, do animation
+                        for (const i in games)
+                            games[i].invalidWordAnim(currentRow);
+
                         break; // if it isn't a word don't continue
                     }
 
-                    for (let i = 0; i < gameCount; i++) // go through each word
+                    for (const i in games) // go through each word
                         if (games[i].active)
                             games[i].tryGuess(currentlyTyped, games[i].board.children[currentRow]); // try word
 
@@ -132,9 +149,10 @@ function handleKeypress(letter)
                 let target = games[j].board.children[currentRow].children[i];
                 target.innerText = currentlyTyped[i] == undefined ? "" : currentlyTyped[i]; // display
                 
-                if (i == currentlyTyped.length - 1 && letter != "<")
+                if (i == currentlyTyped.length - 1 && letter != "<" && letter != "GO")
                 {
                     target.classList.add("typing");
+
                     setTimeout(() => {
                         target.classList.remove("typing");
                     }, 200);
@@ -157,3 +175,11 @@ document.addEventListener("keydown", (e) => {
                 break;
         }
 });
+
+function update_keyboard_colors(boardID = document.getElementById("focused_board_select").value)
+{
+    const board = games[boardID].board;
+    for (let i = 0; i < board.childElementCount; i++)
+        for (let j = 0; j < board.children[i].childElementCount; j++)
+            console.log(board.children[i].children[j]);
+}

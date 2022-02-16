@@ -33,7 +33,14 @@ html
                             while column < 5
                                 span.square(id=`column-${column++}`)
         //- generate the keyboard with pretty colors
-        div.keyboard.keys
+        div.keyboard.keys(align="center")
+            //- keyboard changing stuff
+            //-select#focused_board_select(name="focused_board", onchange="update_keyboard_colors(this.value);")
+                - var boardID = 0;
+                while boardID < config.boardCount 
+                    option(value=`${boardID}`)= `Key colors for board #${boardID + 1}`
+                    - boardID++;
+
             //- keyboard template
             mixin key(letter)
                 span.square.key(id=`key-${letter}`, onclick!=`handleKeypress('${letter}');`)=`${letter}`
@@ -43,3 +50,4 @@ html
                 div.keyboard
                     each letter in row
                         +key(letter)(id=`key-${letter}`)
+        div.bottomSpace

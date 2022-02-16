@@ -2,8 +2,7 @@ const express = require("express");
 const fs = require("fs");
 
 // load words lists
-const wlist = JSON.parse(fs.readFileSync("./words.json")).words;
-const dictionary = fs.readFileSync("./english_words.txt", "utf8").split(",");
+const wlist = JSON.parse(fs.readFileSync("./words.json"));
 
 // express app setup
 const app = express();
@@ -20,7 +19,7 @@ app.get("/play", (req, res) => {
     let words = [];
     while (words.length < req.query.boardCount)
     {
-        let entry = wlist[Math.round(Math.random() * wlist.length) % wlist.length]; // get random word
+        let entry = wlist.words[Math.round(Math.random() * wlist.words.length) % wlist.words.length]; // get random word
         if (words.indexOf(entry) == -1) // if not already used
             words.push(entry); // add to list
     }
@@ -30,7 +29,7 @@ app.get("/play", (req, res) => {
 
 // verify word
 app.post("/verify/:word", (req, res) => {
-    res.send(JSON.stringify({ isWord: dictionary.indexOf(req.params.word.toLowerCase()) != -1 }));
+    res.send(JSON.stringify({ isWord: wlist.possible.indexOf(req.params.word.toLowerCase()) != -1 || wlist.words.indexOf(req.params.word.toLowerCase()) != -1 }));
 });
 
 // handle default request
