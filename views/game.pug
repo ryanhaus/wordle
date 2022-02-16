@@ -35,7 +35,7 @@ html
         //- generate the keyboard with pretty colors
         div.keyboard.keys(align="center")
             //- keyboard changing stuff
-            //-select#focused_board_select(name="focused_board", onchange="update_keyboard_colors(this.value);")
+            select#focused_board_select(name="focused_board", onchange="update_keyboard_colors(this.value);")
                 - var boardID = 0;
                 while boardID < config.boardCount 
                     option(value=`${boardID}`)= `Key colors for board #${boardID + 1}`
@@ -43,7 +43,7 @@ html
 
             //- keyboard template
             mixin key(letter)
-                span.square.key(id=`key-${letter}`, onclick!=`handleKeypress('${letter}');`)=`${letter}`
+                span.square.key(id=`key-${letter}`, block-color="gray", onclick!=`handleKeypress('${letter}');`)=`${letter}`
 
             - var keyboard_content = [ ["Q","W","E","R","T","Y","U","I","O","P"], ["A","S","D","F","G","H","J","K","L"], ["GO","Z","X","C","V","B","N","M","<"] ];
             each row in keyboard_content 

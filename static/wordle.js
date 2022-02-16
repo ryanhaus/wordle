@@ -43,10 +43,14 @@ class WordleGame
                 colors[i] = "yellow"; // set to yellow
             }
 
+            row.children[i].setAttribute("block-color", colors[i]);
+
             setTimeout(() => {
                 row.children[i].classList.add(`switch_${colors[i]}`);
             }, 100 * i);
         }
+
+        update_keyboard_colors(); // update the keyboard colors
     }
 
     // do invalid word animation
@@ -176,10 +180,36 @@ document.addEventListener("keydown", (e) => {
         }
 });
 
+const colorMap = { "gray": "#3a3a3c", "yellow": "#b59f3b", "green": "#538d4e" };
+
 function update_keyboard_colors(boardID = document.getElementById("focused_board_select").value)
 {
+    const letters = "qwertyuiopasdfghjklzxcvbnm".split("");
+
+    for (let i = 0; i < letters.length; i++)
+    {
+        let target = document.getElementById(`key-${letters[i].toUpperCase()}`);
+        target.style.backgroundColor = "#121213";
+        target.style.borderColor = "#3a3a3c";
+        target.setAttribute("block-color", "gray");
+    }
+
     const board = games[boardID].board;
     for (let i = 0; i < board.childElementCount; i++)
         for (let j = 0; j < board.children[i].childElementCount; j++)
-            console.log(board.children[i].children[j]);
+        {
+            let
+                target = board.children[i].children[j],
+                color = target.getAttribute("block-color"),
+                target_key = document.getElementById(`key-${target.innerText.toUpperCase()}`);
+            
+            if (target_key == undefined) continue;
+            let key_color = target_key.getAttribute("block-color");
+
+            if (key_color == "gray" || (key_color == "yellow" && color == "green"))
+            {
+                target_key.style.backgroundColor = colorMap[color];
+                target_key.style.borderColor = colorMap[color];
+            }
+        }
 }
