@@ -7,6 +7,7 @@ html
     body 
         h1.text Wordle Hell
         h3.text=`using ${config.boardCount} boards sized 5x${config.rowCount}`
+        p.text(align="center") You can change the keyboard color by using the dropdown menu or clicking on a board
 
         form.text.boardInput(action="/play" align="center" onsubmit="return verifyForm();")
             | Change to 
@@ -25,7 +26,8 @@ html
         div#boards
             - var board = 0;
             while board < config.boardCount
-                div.board(id=`game-board-${board++}`)
+                div.board(id=`game-board-${board}` onclick=`update_keyboard_colors(${board});`)
+                    - board++;
                     - var row = 0;
                     while row < config.rowCount
                         div(id=`row-${row++}`)

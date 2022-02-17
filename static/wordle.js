@@ -184,6 +184,8 @@ const colorMap = { "gray": "#3a3a3c", "yellow": "#b59f3b", "green": "#538d4e" };
 
 function update_keyboard_colors(boardID = document.getElementById("focused_board_select").value)
 {
+    document.getElementById("focused_board_select").value = boardID; // update dropdown value
+
     const letters = "qwertyuiopasdfghjklzxcvbnm".split("");
 
     for (let i = 0; i < letters.length; i++)

@@ -5,7 +5,7 @@
 :root
 {
     --block-size: min(5.5vh, 5.5vw);
-    --key-size: min(60px, 7.5vw);
+    --key-size: min(5vh, 7.5vw);
 }
 
 body
