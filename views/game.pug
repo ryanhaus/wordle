@@ -1,15 +1,19 @@
 // https://github.com/ryanhaus/wordle 
 html 
     head 
-        title Wordle Hell
+        title= `Wordle Hell - ${mode}`
         link(rel="stylesheet", href="/static/styles.css")
+        script!= `const mode="${mode.toLowerCase()}";const words_json=${words_json};`
         script(src="/static/wordle.js")
     body 
-        h1.text Wordle Hell
+        h1.text= `${mode} Wordle Hell`
         h3.text=`using ${config.boardCount} boards sized 5x${config.rowCount}`
-        p.text(align="center") You can change the keyboard color by using the dropdown menu or clicking on a board
+        p.text(align="center")
+            | You can change the keyboard color by using the dropdown menu or clicking on a board
+            br
+            a.text(align="center" href=`/play/${mode == "Unlimited" ? "daily" : "unlimited"}?boardCount=${config.boardCount}&rowCount=${config.rowCount}`)= `Play ${mode == "Unlimited" ? "daily" : "unlimited"}`
 
-        form.text.boardInput(action="/play" align="center" onsubmit="return verifyForm();")
+        form.text.boardInput(action=`/play/${mode.toLowerCase()}` align="center" onsubmit="return verifyForm();")
             | Change to 
             input.text.boardInput#boardNumber(type="number" min="1" max="32" name="boardCount" value=`${config.boardCount}`)
             |  boards sized 5x

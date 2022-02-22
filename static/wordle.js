@@ -99,15 +99,6 @@ function verifyForm()
     return true; // good to submit
 }
 
-// make HTTP GET request
-function httpGet(url)
-{
-    let xmlHttpReq = new XMLHttpRequest();
-    xmlHttpReq.open("POST", url, false); 
-    xmlHttpReq.send(null);
-    return xmlHttpReq.responseText;
-}
-
 // handle letter input
 function handleKeypress(letter)
 {
@@ -122,7 +113,7 @@ function handleKeypress(letter)
             case "GO":
                 if (currentlyTyped.length == 5) // if full word
                 {
-                    if (!JSON.parse(httpGet(`/verify/${currentlyTyped.toLowerCase()}`)).isWord)
+                    if (words_json.possible.indexOf(currentlyTyped.toLowerCase()) == -1 &&  words_json.words.indexOf(currentlyTyped.toLowerCase()) == -1)
                     {
                         // not a word, do animation
                         for (const i in games)

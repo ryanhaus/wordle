@@ -113,6 +113,9 @@ h3
     margin: calc(var(--key-size / 16));
     font-size: calc(var(--key-size) * 0.5);
     line-height: var(--key-size);
+
+    /* disable 300ms tap delay on mobile devices */
+    touch-action: manipulation;
 }
 
 .keyboard
