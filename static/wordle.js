@@ -56,6 +56,8 @@ class WordleGame
     // do invalid word animation
     invalidWordAnim(row)
     {
+        if (!this.active) return; // if inactive don't do anything
+
         const parent = this.board.children[row].children;
         for (let i = 0; i < parent.length; i++) // go through each letter
         {
